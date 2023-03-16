@@ -6,6 +6,7 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KoordinatorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WargaController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*

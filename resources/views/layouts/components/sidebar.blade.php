@@ -9,17 +9,23 @@
             </a>
         </li><!-- End Dashboard Nav -->
         <li class="nav-item">
-            <a class="nav-link {{ Route::current()->getName()=='warga.index' ? '' : 'collapsed' }}" href="{{ route('warga.index') }}">
-                <i class="bi bi-person"></i>
-                <span>Warga</span>
+            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#" aria-expanded="false">
+                <i class="bi bi-person"></i></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
+            <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a class="nav-link {{ Route::current()->getName()=='warga.index' ? '' : 'collapsed' }}" href="{{ route('warga.index') }}">
+                        <span>Warga</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link {{ Route::current()->getName()=='koordinator.index' ? '' : 'collapsed' }}" href="{{ route('koordinator.index') }}">
+                        <span>Koordinator</span>
+                    </a>
+                </li>
+            </ul>
         </li>
-        <li class="nav-item">
-            <a class="nav-link {{ Route::current()->getName()=='koordinator.index' ? '' : 'collapsed' }}" href="{{ route('koordinator.index') }}">
-                <i class="bi bi-person"></i>
-                <span>Koordinator</span>
-            </a>
-        </li>
+
         <li class="nav-item">
             <a class="nav-link {{ Route::current()->getName()=='aspirasi.index' ? '' : 'collapsed' }}" href="{{ route('aspirasi.index') }}">
                 <i class="bi bi-person"></i>
