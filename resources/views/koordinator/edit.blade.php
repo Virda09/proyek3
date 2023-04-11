@@ -22,14 +22,13 @@
             <div class="col-lg-8 order-lg-1">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Tambah Data</h5>
+                        <h5 class="card-title">Edit Data</h5>
                         @include('layouts.components.flash')
                         <input id="id" type="hidden" class="form-control" name="id" value="{{ $data->id }}">
-                        <input id="user_id" type="hidden" class="form-control" name="user_id" value="{{ $data->user_id }}">
                         <div class="row mb-3">
                             <div class="col-lg-12">
                                 <label for="nama" class="form-label">Nama Koordinator</label>
-                                <input name="nama" type="text" class="form-control" id="nama" require placeholder="Nama koordinator" value="{{$data->name}}">
+                                <input name="nama" type="text" class="form-control" id="nama" require placeholder="Nama koordinator" value="{{$data->nama}}">
                                 @if ($errors->has('nama'))
                                 <span class="invalid-feedback">{{ $errors->first('nama') }}</span>
                                 @endif
@@ -39,7 +38,7 @@
                         <div class="row mb-3">
                             <div class="col-lg-12">
                                 <label for="username" class="form-label">Username</label>
-                                <input name="username" type="text" placeholder="Username" require class="form-control" id="username" value="{{$data->user->username}}">
+                                <input name="username" type="text" placeholder="Username" require class="form-control" id="username" value="{{$data->username}}">
                                 @if ($errors->has('username'))
                                 <span class="invalid-feedback">{{ $errors->first('username') }}</span>
                                 @endif

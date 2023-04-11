@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aspirasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session;
 
 class AspirasiController extends Controller
 {
@@ -11,7 +14,7 @@ class AspirasiController extends Controller
      */
     public function index()
     {
-        //
+        return view('livewire.aspirasi.home');
     }
 
     /**
@@ -43,7 +46,7 @@ class AspirasiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+       
     }
 
     /**
@@ -51,7 +54,19 @@ class AspirasiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $params['status'] = 'dibaca';
+            $aspirasi = Aspirasi::findOrFail(Crypt::decrypt($id));
+            // dd($aspirasi);
+            if ($aspirasi->update(['status' => 'dibaca'])) {
+                Alert()->success('Success', 'Data Berhasil Disimpan');
+            } else {
+                Session::flash('errors', 'Data Gagal Disimpan');
+            }
+            // return redirect('aspirasi');
+        } catch (\Throwable $th) {
+            Session::flash('errors', 'Data Gagal Disimpan');
+        }
     }
 
     /**

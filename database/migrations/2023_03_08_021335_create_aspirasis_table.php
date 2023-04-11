@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('aspirasis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_warga');
-            $table->string('aspirasi');
+            $table->string('nama');
+            $table->text('aspirasi');
             $table->string('jenis_aspirasi');
+            $table->string('status');
             $table->timestamps();
             
             $table->foreign('id_warga')->references('id')->on('wargas')->onDelete('cascade');

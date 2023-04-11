@@ -49,16 +49,16 @@ class LoginController extends Controller
                 'password' => ['required', 'string', 'min:8'],
             ]);
 
-            if (auth()->attempt(array('username' => $input['username'], 'password' => $input['password']))) {
+            if (auth()->attempt(array('username' => $input['username'], 'password' => $input['password'], 'role' => 'admin'))) {
                 return redirect()->route('home');
             } else {
-                Alert()->error('Error', 'Username atau Password Salah');
+                Alert()->error('Login Gagal', 'Username atau Password Salah');
                 return redirect()->route('login');
             }
         } catch (\Throwable $th) {
-            $this->data['type'] = "521";
-            $this->data['message'] = "Web Server is Down.";
-            return response()->view('layouts.error',$this->data);
+            $data['type'] = "521";
+            $data['message'] = "Web Server is Down.";
+            return response()->view('layouts.error',$data);
         }
     }
 }

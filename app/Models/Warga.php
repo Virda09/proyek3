@@ -15,12 +15,15 @@ class Warga extends Model
         'alamat',
         'pekerjaan',
         'agama', 
-        'tempat_tanggal_lahir',
+        'tempat_lahir',
+        'tanggal_lahir',
         'jenis_kelamin',
-        'status'
+        'status',
+        'telepon',
+        'photo'
     ];
 
-    public function user(){
+    public function users(){
         return $this->belongsTo('App\Models\User');
     }
 

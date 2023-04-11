@@ -29,6 +29,7 @@
   <!-- Template Main CSS File -->
   <link href="{{ asset('template/assets/css/style.css') }}" rel="stylesheet">
 
+  @livewireStyles
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/

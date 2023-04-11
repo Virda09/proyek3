@@ -24,7 +24,7 @@ class User extends Authenticatable
         'role',
     ];
 
-    public function instance(){
+    public function warga(){
         return $this->hasOne('App\Models\Warga');
     }
 

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aspirasi;
+use App\Models\Iuran;
+use App\Models\Warga;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $warga = Warga::count();
+        $data['warga'] = $warga;
+        $iuran = Iuran::where('status', 'tunggu')->get()->count();
+        $data['iuran'] = $iuran;
+        $aspirasi = Aspirasi::where('status', 'belum dibaca')->get()->count();
+        $data['aspirasi'] = $aspirasi;
+        return view('home', $data);
     }
 }

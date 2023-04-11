@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('kegiatan', KegiatanController::class)->names('kegiatan');
     Route::resource('aspirasi', AspirasiController::class)->names('aspirasi');
     Route::resource('koordinator', KoordinatorController::class)->names('koordinator');
+    Route::get('/iuran/terima/{id}',[IuranController::class, 'terima'])->name('iuran.terima');
+    Route::get('/iuran/tolak/{id}',[IuranController::class, 'tolak'])->name('iuran.tolak');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

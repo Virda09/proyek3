@@ -18,9 +18,12 @@ return new class extends Migration
             $table->string('pekerjaan');
             $table->string('agama');
             $table->string('nama_lengkap');
-            $table->string('tempat_tanggal_lahir');
+            $table->string('tempat_lahir');
+            $table->string('tanggal_lahir');
             $table->string('jenis_kelamin');
             $table->string('status');
+            $table->string('telepon');
+            $table->string('photo');
             $table->timestamps();
             
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

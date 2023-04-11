@@ -28,19 +28,19 @@
 
         <li class="nav-item">
             <a class="nav-link {{ Route::current()->getName()=='aspirasi.index' ? '' : 'collapsed' }}" href="{{ route('aspirasi.index') }}">
-                <i class="bi bi-person"></i>
+                <i class="bi bi-chat-text"></i>
                 <span>Aspirasi</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Route::current()->getName()=='iuran.index' ? '' : 'collapsed' }}" href="{{ route('iuran.index') }}">
-                <i class="bi bi-person"></i>
+                <i class="bi bi-currency-dollar"></i>
                 <span>Iuran</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Route::current()->getName()=='kegiatan.index' ? '' : 'collapsed' }}" href="{{ route('kegiatan.index') }}">
-                <i class="bi bi-person"></i>
+                <i class="bi bi-activity"></i>
                 <span>Kegiatan</span>
             </a>
         </li>

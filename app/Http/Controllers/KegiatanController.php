@@ -16,8 +16,8 @@ class KegiatanController extends Controller
     public function index()
     {
         $kegiatans = Kegiatan::all();
-        $this->data['kegiatan'] = $kegiatans;
-        return view('kegiatan.index', $this->data);
+        $data['kegiatan'] = $kegiatans;
+        return view('kegiatan.index', $data);
     }
 
     /**
@@ -66,8 +66,8 @@ class KegiatanController extends Controller
     public function edit(string $id)
     {
         $kegiatan = Kegiatan::findOrFail(Crypt::decrypt($id));
-        $this->data['data'] = $kegiatan;
-        return view('kegiatan.edit', $this->data);
+        $data['data'] = $kegiatan;
+        return view('kegiatan.edit', $data);
     }
 
     /**

@@ -19,8 +19,8 @@ class ProfileController extends Controller
     public function index()
     {
         $admin = User::where('id',auth()->user()->id)->first();
-        $this->data['data'] = $admin;
-        return view('admin.profile',$this->data);
+        $data['data'] = $admin;
+        return view('admin.profile',$data);
     }
 
     public function update(Request $request)
