@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Aspirasi;
 use App\Models\Iuran;
+use App\Models\Kegiatan;
 use App\Models\Warga;
 use Illuminate\Http\Request;
+use Nette\Utils\DateTime;
 
 class HomeController extends Controller
 {
@@ -32,6 +34,13 @@ class HomeController extends Controller
         $data['iuran'] = $iuran;
         $aspirasi = Aspirasi::where('status', 'belum dibaca')->get()->count();
         $data['aspirasi'] = $aspirasi;
+        $date = new DateTime();
+        $timeNow = $date->format('Y-m-d\TH:i');
+        $kegiatan = Kegiatan::where('tanggal_kegiatan', '>=', $timeNow)
+            ->orderBy('tanggal_kegiatan', 'ASC')
+            ->limit(5)
+            ->get();
+        $data['kegiatan'] = $kegiatan;
         return view('home', $data);
     }
 }

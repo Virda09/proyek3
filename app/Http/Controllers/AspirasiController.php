@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aspirasi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
+use Nette\Utils\DateTime;
+use PDF;
 
 class AspirasiController extends Controller
 {
@@ -14,7 +17,53 @@ class AspirasiController extends Controller
      */
     public function index()
     {
-        return view('livewire.aspirasi.home');
+        $date = new DateTime();
+
+        Session::put('filter', 'Hari Ini');
+        $timeNow = $date->format('Y-m-d');
+        $aspirasi = Aspirasi::where('created_at', 'like', '%' . $timeNow . '%')->get();
+
+        $data['aspirasi'] = $aspirasi;
+        return view('aspirasi.index', $data);
+    }
+
+    public function filter(string $filter)
+    {
+        $date = new DateTime();
+        if ($filter == '' || $filter == 'hari ini') {
+            Session::put('filter', 'Hari Ini');
+            $timeNow = $date->format('Y-m-d');
+        } elseif ($filter == 'bulan ini') {
+            Session::put('filter', 'Bulan Ini');
+            $timeNow = $date->format('Y-m');
+        } else {
+            Session::put('filter', 'Tahun Ini');
+            $timeNow = $date->format('Y');
+        }
+
+        $aspirasi = Aspirasi::where('created_at', 'like', '%' . $timeNow . '%')->get();
+        $data['aspirasi'] = $aspirasi;
+        return view('aspirasi.index', $data);
+    }
+
+    public function cetak(string $cetak)
+    {
+        $date = Carbon::now();
+        if ($cetak == 'bulan ini') {
+            $timeNow = $date->format('Y-m');
+        } else {
+            $timeNow = $date->subMonth()->format('Y-m');
+        }
+        $aspirasi = Aspirasi::where('created_at', 'like', '%' . $timeNow . '%')
+                ->orderBy('jenis_aspirasi')
+                ->get();
+        $data = [
+            'title' => 'Aspirasi Warga',
+            'date' => $date->format('m/d/Y'),
+            'aspirasi' => $aspirasi
+        ];
+        $pdf = PDF::loadView('cetak.aspirasi', $data);
+        return $pdf->download('aspirasi.pdf');
     }
 
     /**
@@ -46,7 +95,6 @@ class AspirasiController extends Controller
      */
     public function edit(string $id)
     {
-       
     }
 
     /**
@@ -57,13 +105,13 @@ class AspirasiController extends Controller
         try {
             $params['status'] = 'dibaca';
             $aspirasi = Aspirasi::findOrFail(Crypt::decrypt($id));
-            // dd($aspirasi);
-            if ($aspirasi->update(['status' => 'dibaca'])) {
+            $status = $aspirasi->update(['status' => 'dibaca']);
+            if ($status) {
                 Alert()->success('Success', 'Data Berhasil Disimpan');
             } else {
                 Session::flash('errors', 'Data Gagal Disimpan');
             }
-            // return redirect('aspirasi');
+            return redirect('aspirasi');
         } catch (\Throwable $th) {
             Session::flash('errors', 'Data Gagal Disimpan');
         }

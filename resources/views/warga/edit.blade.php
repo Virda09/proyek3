@@ -71,21 +71,19 @@
                         <div class="row mb-3">
                             <div class="col-lg-12">
                                 <div class="form-group{{ $errors->has('agama') ? ' has-error' : '' }}">
-                                    <label for="agama" class="col-md-10 control-label">Agama</label>
-                                    <div>
-                                        <select class="form-control" name="agama" required="">
-                                            <option value="Islam" {{$data->agama == 'Islam' ? 'selected' : ''}}>Islam</option>
-                                            <option value="Kristen" {{$data->agama == 'Kristen' ? 'selected' : ''}}>Kristen</option>
-                                            <option value="Hindu" {{$data->agama == 'Hindu' ? 'selected' : ''}}>Hindu</option>
-                                            <option value="Buddha" {{$data->agama == 'Buddha' ? 'selected' : ''}}>Buddha</option>
-                                            <option value="Kong Hu Chu" {{$data->agama == 'Kong Hu Chu' ? 'selected' : ''}}>Kong Hu Chu</option>
-                                        </select>
-                                        @if ($errors->has('agama'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('agama') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
+                                    <label for="agama" class="form-label">Agama</label>
+                                    <select class="form-control" name="agama" required="">
+                                        <option value="Islam" {{$data->agama == 'Islam' ? 'selected' : ''}}>Islam</option>
+                                        <option value="Kristen" {{$data->agama == 'Kristen' ? 'selected' : ''}}>Kristen</option>
+                                        <option value="Hindu" {{$data->agama == 'Hindu' ? 'selected' : ''}}>Hindu</option>
+                                        <option value="Buddha" {{$data->agama == 'Buddha' ? 'selected' : ''}}>Buddha</option>
+                                        <option value="Kong Hu Chu" {{$data->agama == 'Kong Hu Chu' ? 'selected' : ''}}>Kong Hu Chu</option>
+                                    </select>
+                                    @if ($errors->has('agama'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('agama') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -100,7 +98,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group{{ $errors->has('tanggal_lahir') ? ' has-error' : '' }}">
-                                    <label for="tanggal_lahir" class="col-md-4 control-label">Tanggal Lahir</label>
+                                    <label for="tanggal_lahir" class=" form-label">Tanggal Lahir</label>
                                     <input id="tanggal_lahir" type="date" class="form-control" name="tanggal_lahir" value="{{ $data->tanggal_lahir }}" required>
                                     @if ($errors->has('tanggal_lahir'))
                                     <span class="help-block">
@@ -114,7 +112,7 @@
                         <div class="row mb-3">
                             <div class="col-lg-6">
                                 <div class="form-group{{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
-                                    <label for="dender" class="col-md-4 control-label">Jenis Kelamin</label>
+                                    <label for="dender" class="  form-label">Jenis Kelamin</label>
                                     <select class="form-control" name="jenis_kelamin">
                                         <option value="laki-laki" {{$data->jenis_kelamin == 'laki-laki' ? 'selected' : ''}}>Laki - Laki</option>
                                         <option value="perempuan" {{$data->jenis_kelamin == 'perempuan' ? 'selected' : ''}}>Perempuan</option>
@@ -124,7 +122,7 @@
 
                             <div class="col-lg-6">
                                 <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                                    <label for="dender" class="col-md-4 control-label">Jenis Kelamin</label>
+                                    <label for="dender" class="  form-label">Jenis Kelamin</label>
                                     <select class="form-control" name="status">
                                         <option value="Menikah" {{$data->status == 'Menikah' ? 'selected' : ''}}>Menikah</option>
                                         <option value="Belum Menikah" {{$data->status == 'Belum Menikah' ? 'selected' : ''}}>Belum Menikah</option>

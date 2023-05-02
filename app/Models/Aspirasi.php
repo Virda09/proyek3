@@ -13,6 +13,8 @@ class Aspirasi extends Model
         'id_warga',
         'aspirasi',
         'jenis_aspirasi',
+        'status',
+        'nama'
     ];
 
     public function warga(){

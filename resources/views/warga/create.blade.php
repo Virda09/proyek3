@@ -68,7 +68,7 @@
                         <div class="row mb-3">
                             <div class="col-lg-12">
                                 <div class="form-group{{ $errors->has('agama') ? ' has-error' : '' }}">
-                                    <label for="agama" class="col-md-10 control-label">Agama</label>
+                                    <label for="agama" class="col-md-10 form-label">Agama</label>
                                     <div>
                                         <select class="form-control" name="agama" required="">
                                             <option value="Islam">Islam</option>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group{{ $errors->has('tanggal_lahir') ? ' has-error' : '' }}">
-                                    <label for="tanggal_lahir" class="control-label">Tanggal Lahir</label>
+                                    <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
                                     <input id="tanggal_lahir" type="date" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
                                     @if ($errors->has('tanggal_lahir'))
                                     <span class="help-block">
@@ -111,7 +111,7 @@
                         <div class="row mb-3">
                             <div class="col-lg-6">
                                 <div class="form-group{{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
-                                    <label for="jenis_kelamin" class="control-label">Jenis Kelamin</label>
+                                    <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                                     <select class="form-control" name="jenis_kelamin">
                                         <option value="laki-laki">Laki - Laki</option>
                                         <option value="perempuan">Perempuan</option>
@@ -121,7 +121,7 @@
 
                             <div class="col-lg-6">
                                 <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                                    <label for="dender" class="control-label">Status Pernikahan</label>
+                                    <label for="dender" class="form-label">Status Pernikahan</label>
                                     <select class="form-control" name="status">
                                         <option value="Menikah">Menikah</option>
                                         <option value="Belum Menikah">Belum Menikah</option>

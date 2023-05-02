@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('koordinator', KoordinatorController::class)->names('koordinator');
     Route::get('/iuran/terima/{id}',[IuranController::class, 'terima'])->name('iuran.terima');
     Route::get('/iuran/tolak/{id}',[IuranController::class, 'tolak'])->name('iuran.tolak');
+    Route::get('/aspirasi/filter/{filter}',[AspirasiController::class, 'filter'])->name('aspirasi.filter');
+    Route::get('/aspirasi/cetak/{cetak}',[AspirasiController::class, 'cetak'])->name('aspirasi.cetak');
+    Route::get('/iuran/cetak/{cetak}',[IuranController::class, 'cetak'])->name('iuran.cetak');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

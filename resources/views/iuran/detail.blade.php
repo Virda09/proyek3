@@ -77,7 +77,9 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <img id="preview" src="{{ asset('storage/'.$data->bukti) }}" width="200px" height="200px" />
+                                            <p style="text-align: center;">
+                                            <img id="preview" src="{{ asset('storage/'.$data->bukti) }}" width="350px" height="450px" />
+                                            </p>
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

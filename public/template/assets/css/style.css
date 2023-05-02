@@ -857,6 +857,7 @@ h6 {
 }
 
 .dashboard .activity .activity-item .activite-label {
+  padding-right: 6px;
   color: #888;
   position: relative;
   flex-shrink: 0;
