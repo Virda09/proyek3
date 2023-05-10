@@ -20,13 +20,12 @@ class ProfileController extends Controller
     {
         $admin = User::where('id',auth()->user()->id)->first();
         $data['data'] = $admin;
-        return view('admin.profile',$data);
+        return view('profile',$data);
     }
 
     public function update(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:255',
             'current_password' => 'nullable|required_with:new_password',
             'new_password' => 'nullable|min:8|max:12|required_with:current_password',
             'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password'
@@ -34,7 +33,6 @@ class ProfileController extends Controller
 
 
         $user = User::findOrFail(Auth::user()->id);
-        $user->username = $request->input('username');
 
         if (!is_null($request->input('current_password'))) {
             if (Hash::check($request->input('current_password'), $user->password)) {
@@ -48,6 +46,6 @@ class ProfileController extends Controller
         } else {
             Session::flash('error', 'Data Gagal Disimpan');
         }
-        return redirect()->route('admin.profile');
+        return redirect()->route('profile');
     }
 }

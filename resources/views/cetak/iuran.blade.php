@@ -7,8 +7,8 @@
 </head>
 
 <body>
-    <h1>{{ $title }}</h1>
-    <p>{{ $date }}</p>
+    <center><h1>{{ $title }}</h1></center>
+    <center><p>{{ $date }}</p></center>
     <table class="table table-bordered">
         <tr>
             <th>No</th>

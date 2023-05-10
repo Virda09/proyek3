@@ -17,7 +17,7 @@
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
         <li><a class="dropdown-item" href="{{Route('iuran.cetak','bulan ini')}}">Bulan Ini</a></li>
         <li><a class="dropdown-item" href="{{Route('iuran.cetak','kemarin')}}">Bulan Sebelumnya</a></li>
-        <li><a class="dropdown-item" href="{{Route('iuran.cetak','kemarin')}}">Tahun Ini</a></li>
+        <li><a class="dropdown-item" href="{{Route('iuran.cetak','tahun ini')}}">Tahun Ini</a></li>
       </ul>
     </div>
   </div>

@@ -108,10 +108,13 @@ class IuranController extends Controller
         $date = Carbon::now();
         if ($cetak == 'bulan ini') {
             $timeNow = $date->format('Y-m');
+            $title = "Bulan ".$date->isoFormat('MMMM Y');
         } else if ($cetak == 'kemarin') {
             $timeNow = $date->subMonth()->format('Y-m');
+            $title = "Bulan ".$date->isoFormat('MMMM Y');
         } else {
             $timeNow = $date->format('Y');
+            $title = "Tahun ".$date->isoFormat('Y');
         }
 
         $iuran = Iuran::join("wargas", function ($join) {
@@ -123,7 +126,7 @@ class IuranController extends Controller
             ->get();
         $data = [
             'title' => 'Iuran Warga',
-            'date' => $date->format('m/d/Y'),
+            'date' => $title,
             'iuran' => $iuran
         ];
         $pdf = PDF::loadView('cetak.iuran', $data);
