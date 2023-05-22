@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,6 +23,13 @@ class Warga extends Model
         'telepon',
         'photo'
     ];
+
+    protected function photo(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($photo) => asset('storage/uploads/warga' . $photo),
+        );
+    }
 
     public function users(){
         return $this->belongsTo('App\Models\User');

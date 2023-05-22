@@ -41,7 +41,7 @@ class WargaController extends Controller
             $params['nama'] = $request->nama_lengkap;
 
             if ($request->has('photo')) {
-                $params['photo'] = $this->simpanImage('kd', $request->file('photo'), $params['username']);
+                $params['photo'] = $this->simpanImage($request->file('photo'), $params['username']);
             }
 
             $user = User::create($params);
@@ -100,7 +100,7 @@ class WargaController extends Controller
             }
 
             if ($request->has('photo')) {
-                $params['photo'] = $this->simpanImage('kd', $request->file('photo'), $params['username']);
+                $params['photo'] = $this->simpanImage($request->file('photo'), $params['username']);
             } else {
                 $params = $request->except('photo');
             }
@@ -144,18 +144,18 @@ class WargaController extends Controller
         }
     }
 
-    private function simpanImage($type, $foto, $nama)
+    private function simpanImage($foto, $nama)
     {
         $dt = new DateTime();
 
-        $path = public_path('storage/uploads/koordinator/' . $type . '/' . $dt->format('Y-m-d') . '/' . $nama);
+        $path = public_path('storage/uploads/warga');
         if (!File::isDirectory($path)) {
             File::makeDirectory($path, 0755, true, true);
         }
         $file = $foto;
-        $name =  $type . '_' . $nama . '_' . $dt->format('Y-m-d');
+        $name = $nama . '_' . $dt->format('Y-m-d');
         $fileName = $name . '.' . $file->getClientOriginalExtension();
-        $folder = '/uploads/koordinator/' . $type . '/' . $dt->format('Y-m-d') . '/' . $nama;
+        $folder = '/uploads/koordinator/warga';
 
         $check = public_path($folder) . $fileName;
 
@@ -163,7 +163,7 @@ class WargaController extends Controller
             File::delete($check);
         }
 
-        $filePath = $file->storeAs($folder, $fileName, 'public');
-        return $filePath;
+        $file->storeAs($folder, $fileName, 'public');
+        return $fileName;
     }
 }
