@@ -38,7 +38,7 @@ class ApiAspirasiController extends Controller
         }
 
         $params = $request->all();
-        $params['status'] = 'belum dibaca';
+        $params['status'] = 'Belum Dibaca';
         try {
             $post = Aspirasi::create($params);
             if ($post) {
@@ -72,7 +72,7 @@ class ApiAspirasiController extends Controller
         }
 
         $params = $request->all();
-        $params['status'] = 'belum dibaca';
+        $params['status'] = 'Belum Dibaca';
 
         try {
             $post = Aspirasi::findOrFail($id);

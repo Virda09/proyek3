@@ -29,7 +29,7 @@ class ApiWargaController extends Controller
             'telepon' => 'required|unique:wargas,telepon,NULL',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096',
             'username' => 'required|unique:users,username,NULL',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
         ]);
 
         //check if validation fails
@@ -78,9 +78,10 @@ class ApiWargaController extends Controller
         return new PostResource(true, 'Data Warga', $posts);
     }
 
-    public function update(Request $request, $id)
+    public function updateAkun(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'id' => 'required',
             'nama_lengkap' => 'required|string|max:255',
             'pekerjaan' => 'required|string|max:255',
             'alamat' => 'required|string',
@@ -89,9 +90,7 @@ class ApiWargaController extends Controller
             'tanggal_lahir' => 'required|string|max:255',
             'jenis_kelamin' => 'required',
             'status' => 'required',
-            'telepon' => 'required|unique:wargas,telepon,' . $request->id,
-            'username' => 'required|unique:users,username,' . $request->id_user,
-            'password' => 'nullable|string|min:8|confirmed',
+            'telepon' => 'required',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
         ]);
 
@@ -100,25 +99,20 @@ class ApiWargaController extends Controller
         }
 
         $params = $request->all();
-        $params['username'] = $request->username;
+        $params = $request->except('id');
         $params['nama'] = $request->nama_lengkap;
-
-        if ($request->filled('password')) {
-            $params['password'] = Hash::make($request->password);
-        } else {
-            $params = $request->except('password');
-        }
 
         if ($request->has('photo')) {
             $params['photo'] = $this->simpanImage($request->file('photo'), $request->username);
         } else {
-            $params = $request->except('photo');
+            $params = $request->except(['photo','id']);
         }
 
         try {
-            $warga = Warga::findOrFail($id);
-            $user = User::findOrFail($warga->id_user);
-            if ($warga->update($params) && $user->update($params)) {
+            $data = Warga::where('id_user',$request->id)->first();
+            $warga = Warga::findOrFail($data->id);
+            // dd($warga);
+            if ($warga->update($params)) {
                 $sql = True;
                 $message = 'Update Berhasil';
             } else {
@@ -129,7 +123,7 @@ class ApiWargaController extends Controller
             return new PostResource($sql, $message, []);
         } catch (\Throwable $th) {
             $sql = False;
-            $message = 'Terjadi Kesalahan';
+            $message = $th->getMessage();
 
             return new PostResource($sql, $message, []);
         }

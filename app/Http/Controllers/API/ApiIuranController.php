@@ -24,7 +24,6 @@ class ApiIuranController extends Controller
         $validator = Validator::make($request->all(), [
             'id_warga' => 'required',
             'bukti' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096',
-            'tgl_bayar' => 'required',
             'nominal' => 'required|integer'
         ]);
 
@@ -37,7 +36,7 @@ class ApiIuranController extends Controller
         $timeNow = $date->format('Y-m-d H:i');
 
         $params = $request->all();
-        $params['status'] = 'belum dilihat';
+        $params['status'] = 'Belum Dilihat';
         $params['tgl_bayar'] = $timeNow;
 
         if ($request->has('bukti')) {
@@ -69,7 +68,7 @@ class ApiIuranController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function updateIuran(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'id_warga' => 'required',
@@ -92,7 +91,7 @@ class ApiIuranController extends Controller
         }
 
         try {
-            $post = Iuran::findOrFail($id);
+            $post = Iuran::findOrFail($request->id);
             if ($post->update($params)) {
                 $sql = True;
                 $message = 'Update Berhasil';

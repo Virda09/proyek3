@@ -21,7 +21,7 @@
             <div class="col-lg-4 order-lg-2">
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                        <img id="preview" src="{{ $data->photo == null ? asset('images/preview.png') : asset('storage/'.$data->photo) }}" class="rounded-circle" width="200px" height="200px" />
+                        <img id="preview" src="{{ $data->photo == null ? asset('images/preview.png') : $data->photo }}" class="rounded-circle" width="200px" height="200px" />
                         <div class="card-body mt-3">
                             <input accept="image/*" type='file' id="photo" class="form-control " name="photo" value="{{ old('photo') }}" />
                             @if ($errors->has('photo'))

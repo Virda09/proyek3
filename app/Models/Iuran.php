@@ -21,7 +21,7 @@ class Iuran extends Model
     protected function bukti(): Attribute
     {
         return Attribute::make(
-            get: fn ($bukti) => asset('storage/uploads/iuran' . $bukti),
+            get: fn ($bukti) => asset('storage/uploads/iuran/' . $bukti),
         );
     }
 

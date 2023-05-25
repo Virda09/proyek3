@@ -11,6 +11,7 @@ class Warga extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'id_user',
         'nama_lengkap',
         'alamat',
@@ -27,7 +28,7 @@ class Warga extends Model
     protected function photo(): Attribute
     {
         return Attribute::make(
-            get: fn ($photo) => asset('storage/uploads/warga' . $photo),
+            get: fn ($photo) => asset('storage/uploads/warga/' . $photo),
         );
     }
 
