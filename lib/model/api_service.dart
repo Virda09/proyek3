@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http_parser/http_parser.dart';
 import 'package:intl/intl.dart';
+import 'package:proyek3/model/activity.dart';
 import 'package:proyek3/model/aspirasi.dart';
 import 'package:proyek3/model/iuran.dart';
 import 'package:proyek3/model/kegiatan.dart';
@@ -12,7 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:proyek3/model/warga.dart';
 
 class ApiService {
-  final String baseUrl = "http://192.168.43.166:8080/api";
+  final String baseUrl = "http://10.0.164.241:8080/api";
 
   String dateFormat(String date) {
     var newStr = '${date.substring(0, 10)} ${date.substring(11, 23)}';
@@ -86,6 +87,22 @@ class ApiService {
       }
     } else {
       return false;
+    }
+  }
+
+  Future<List<Activity>> getActivity() async {
+    http.Response response;
+    response = await http.get(Uri.parse("$baseUrl/activity"));
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      final res = json.decode(response.body);
+      if (res['success']) {
+        return ActivityFromJson(response.body);
+      } else {
+        return [];
+      }
+    } else {
+      return [];
     }
   }
 
@@ -319,6 +336,63 @@ class ApiService {
   Future<bool> deleteIuran(String id) async {
     final response = await http.delete(
       Uri.parse("$baseUrl/iuran/$id"),
+      headers: {"content-type": "application/json"},
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      final res = json.decode(response.body);
+      if (res['success']) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> createKegiatan(Kegiatan data) async {
+    final response = await http.post(
+      Uri.parse("$baseUrl/kegiatan"),
+      headers: {"content-type": "application/json"},
+      body: KegiatanToJson(data),
+    );
+    print(response.body);
+    if (response.statusCode == 201) {
+      final res = json.decode(response.body);
+      if (res['success']) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> editKegiatan(Kegiatan data) async {
+    final response = await http.put(
+      Uri.parse("$baseUrl/kegiatan/${data.id}"),
+      headers: {"content-type": "application/json"},
+      body: KegiatanToJson(data),
+    );
+
+    print(response.body);
+    if (response.statusCode == 200) {
+      final res = json.decode(response.body);
+      if (res['success']) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> deleteKegiatan(String id) async {
+    final response = await http.delete(
+      Uri.parse("$baseUrl/kegiatan/$id"),
       headers: {"content-type": "application/json"},
     );
     print(response.body);

@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:proyek3/auth/login_page.dart';
+import 'package:proyek3/color.dart';
 import 'package:proyek3/home/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,7 +34,7 @@ class _LauncherPageState extends State<LauncherPage> {
     var duration = const Duration(seconds: 3);
     return Timer(duration, () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => _isLogin ? HomePage() : LoginPage()));
+          builder: (context) => _isLogin ? HomePage() :LoginPage()));
     });
   }
 
@@ -46,7 +47,7 @@ class _LauncherPageState extends State<LauncherPage> {
         height: size.height,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.black.withRed(100),
+          color: primaryColor,
           image: DecorationImage(
             opacity: 0.5,
             image: AssetImage('assets/bg2.jpg'),
@@ -59,9 +60,9 @@ class _LauncherPageState extends State<LauncherPage> {
           children: [
             Center(
               child: Text(
-                "DIMADES",
+                "APPs",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: secondaryColor,
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic),

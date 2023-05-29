@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, missing_return, deprecated_member_use, empty_catches
 import 'package:flutter/material.dart';
+import 'package:proyek3/color.dart';
 import 'package:proyek3/komponents/build_textfield.dart';
 import 'package:proyek3/auth/register_detail_page.dart';
 
@@ -25,12 +26,12 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black.withRed(100),
+        backgroundColor: primaryColor,
         elevation: 0,
         title: Text(
           "REGISTRASI",
           style: TextStyle(
-              fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+              fontSize: 28, fontWeight: FontWeight.bold, color: secondaryColor),
         ),
       ),
       key: _scaffold,
@@ -39,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Container(
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(color: Colors.black.withRed(100),
+          decoration: BoxDecoration(color: primaryColor,
             image: DecorationImage(
               opacity: 0.5,
                   image: AssetImage('assets/bg2.jpg'),
@@ -53,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: secondaryColor,
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -77,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   }
                                 },
                                 input: TextInputType.name,
-                                color: Colors.black.withRed(100),
+                                color: primaryColor,
                               ),
                             ),
                             SizedBox(
@@ -100,31 +101,31 @@ class _RegisterPageState extends State<RegisterPage> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide(
-                                        color: Colors.black.withRed(100),
+                                        color: primaryColor,
                                         width: 2,
                                       )),
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide(
-                                        color: Colors.black.withRed(100),
+                                        color: primaryColor,
                                         width: 2,
                                       )),
                                   hintText: "Password",
                                   labelText: 'Password',
                                   labelStyle: TextStyle(
-                                    color: Colors.black.withRed(100),
+                                    color: primaryColor,
                                   ),
                                   prefixIcon: Icon(Icons.lock,
-                                      color: Colors.black.withRed(100)),
+                                      color: primaryColor),
                                   suffixIcon: IconButton(
                                     icon: _isObpass
                                         ? Icon(
                                             Icons.visibility,
-                                            color: Colors.black.withRed(100),
+                                            color: primaryColor,
                                           )
                                         : Icon(
                                             Icons.visibility_off,
-                                            color: Colors.black.withRed(100),
+                                            color: primaryColor,
                                           ),
                                     onPressed: () {
                                       setState(
@@ -157,31 +158,31 @@ class _RegisterPageState extends State<RegisterPage> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide(
-                                        color: Colors.black.withRed(100),
+                                        color: primaryColor,
                                         width: 2,
                                       )),
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide(
-                                        color: Colors.black.withRed(100),
+                                        color: primaryColor,
                                         width: 2,
                                       )),
                                   hintText: "Konfirmasi Password",
                                   labelText: 'Konfirmasi Password',
                                   labelStyle: TextStyle(
-                                    color: Colors.black.withRed(100),
+                                    color: primaryColor,
                                   ),
                                   prefixIcon: Icon(Icons.lock,
-                                      color: Colors.black.withRed(100)),
+                                      color: primaryColor),
                                   suffixIcon: IconButton(
                                     icon: _isObcpass
                                         ? Icon(
                                             Icons.visibility,
-                                            color: Colors.black.withRed(100),
+                                            color: primaryColor,
                                           )
                                         : Icon(
                                             Icons.visibility_off,
-                                            color: Colors.black.withRed(100),
+                                            color: primaryColor,
                                           ),
                                     onPressed: () {
                                       setState(
@@ -224,7 +225,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     }
                                   },
                                   style: ElevatedButton.styleFrom(
-                                      primary: Colors.black.withRed(100),
+                                      primary: primaryColor,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(17))),
@@ -232,7 +233,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.white)),
+                                          color: secondaryColor)),
                                 ),
                               ),
                             ),
@@ -251,7 +252,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   child: Text(" Masuk",
                                       style: TextStyle(
                                           fontSize: 18,
-                                          color: Colors.black.withRed(100))),
+                                          color: primaryColor)),
                                 ),
                               ],
                             ),

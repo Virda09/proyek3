@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyek3/akun/akun_page.dart';
 import 'package:proyek3/akun/alert.dart';
+import 'package:proyek3/color.dart';
 import 'package:proyek3/model/api_service.dart';
 
 class EditPasswordPage extends StatefulWidget {
@@ -32,11 +33,11 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black.withRed(100),
+        backgroundColor: primaryColor,
         title: Text(
           "Edit Password",
           style: TextStyle(
-              fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+              fontSize: 28, fontWeight: FontWeight.bold, color: secondaryColor),
         ),
       ),
       key: _scaffold,
@@ -45,7 +46,14 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
           Container(
             width: double.infinity,
             height: 1000,
-            decoration: BoxDecoration(color: Colors.black.withRed(100)),
+            decoration: BoxDecoration(
+            color: primaryColor,
+            image: const DecorationImage(
+              opacity: 0.5,
+              image: AssetImage('assets/bg2.jpg'),
+              fit: BoxFit.fill,
+            ),
+          ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -54,7 +62,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: secondaryColor,
                         borderRadius: BorderRadius.circular(20)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -64,7 +72,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                           Text(
                           "Edit Password",
                           style: TextStyle(
-                            color: Colors.black.withRed(100),
+                            color: primaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
                           ),
@@ -95,31 +103,31 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(10),
                                             borderSide: BorderSide(
-                                              color: Colors.black.withRed(100),
+                                              color: primaryColor,
                                               width: 2,
                                             )),
                                         focusedBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(10),
                                             borderSide: BorderSide(
-                                              color: Colors.black.withRed(100),
+                                              color: primaryColor,
                                               width: 2,
                                             )),
                                         hintText: "Password",
                                         labelText: 'Password',
                                         labelStyle: TextStyle(
-                                          color: Colors.black.withRed(100),
+                                          color: primaryColor,
                                         ),
                                         prefixIcon: Icon(Icons.lock,
-                                            color: Colors.black.withRed(100)),
+                                            color: primaryColor),
                                         suffixIcon: IconButton(
                                           icon: _isObpass
                                               ? Icon(
                                                   Icons.visibility,
-                                                  color: Colors.black.withRed(100),
+                                                  color: primaryColor,
                                                 )
                                               : Icon(
                                                   Icons.visibility_off,
-                                                  color: Colors.black.withRed(100),
+                                                  color: primaryColor,
                                                 ),
                                           onPressed: () {
                                             setState(
@@ -152,31 +160,31 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(10),
                                             borderSide: BorderSide(
-                                              color: Colors.black.withRed(100),
+                                              color: primaryColor,
                                               width: 2,
                                             )),
                                         focusedBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(10),
                                             borderSide: BorderSide(
-                                              color: Colors.black.withRed(100),
+                                              color: primaryColor,
                                               width: 2,
                                             )),
                                         hintText: "Password Baru",
                                         labelText: 'Password Baru',
                                         labelStyle: TextStyle(
-                                          color: Colors.black.withRed(100),
+                                          color: primaryColor,
                                         ),
                                         prefixIcon: Icon(Icons.lock,
-                                            color: Colors.black.withRed(100)),
+                                            color: primaryColor),
                                         suffixIcon: IconButton(
                                           icon: _isObnpass
                                               ? Icon(
                                                   Icons.visibility,
-                                                  color: Colors.black.withRed(100),
+                                                  color: primaryColor,
                                                 )
                                               : Icon(
                                                   Icons.visibility_off,
-                                                  color: Colors.black.withRed(100),
+                                                  color: primaryColor,
                                                 ),
                                           onPressed: () {
                                             setState(
@@ -209,31 +217,31 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(10),
                                             borderSide: BorderSide(
-                                              color: Colors.black.withRed(100),
+                                              color: primaryColor,
                                               width: 2,
                                             )),
                                         focusedBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(10),
                                             borderSide: BorderSide(
-                                              color: Colors.black.withRed(100),
+                                              color: primaryColor,
                                               width: 2,
                                             )),
                                         hintText: "Konfirmasi Password",
                                         labelText: 'Konfirmasi Password',
                                         labelStyle: TextStyle(
-                                          color: Colors.black.withRed(100),
+                                          color: primaryColor,
                                         ),
                                         prefixIcon: Icon(Icons.lock,
-                                            color: Colors.black.withRed(100)),
+                                            color: primaryColor),
                                         suffixIcon: IconButton(
                                           icon: _isObcpass
                                               ? Icon(
                                                   Icons.visibility,
-                                                  color: Colors.black.withRed(100),
+                                                  color: primaryColor,
                                                 )
                                               : Icon(
                                                   Icons.visibility_off,
-                                                  color: Colors.black.withRed(100),
+                                                  color: primaryColor,
                                                 ),
                                           onPressed: () {
                                             setState(
@@ -298,7 +306,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                                           }
                                         },
                                         style: ElevatedButton.styleFrom(
-                                            primary: Colors.black.withRed(100),
+                                            primary: primaryColor,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(17))),
@@ -306,7 +314,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                                             style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500,
-                                                color: Colors.white)),
+                                                color: secondaryColor)),
                                       ),
                                     ),
                                   ),

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, missing_return, deprecated_member_use, unrelated_type_equality_checks, non_constant_identifier_names
 
+import 'package:proyek3/color.dart';
 import 'package:proyek3/home/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:proyek3/auth/register_page.dart';
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
-            color: Colors.black.withRed(100),
+            color: primaryColor,
             image: DecorationImage(
               opacity: 0.5,
                   image: AssetImage('assets/bg2.jpg'),
@@ -69,14 +70,14 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                      color: secondaryColor),
                 ),
               ),
               Text("Silahkan Masuk Terlebih Dahulu\n",
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: Colors.white)),
+                      color: secondaryColor)),
               Form(
                   key: _form,
                   child: Column(
@@ -94,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                               return 'Username tidak boleh kosong';
                             }
                           },
-                          color: Colors.white,
+                          color: secondaryColor,
                         ),
                       ),
                       SizedBox(
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 30),
                         child: TextFormField(
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: secondaryColor),
                           controller: password,
                           validator: (text) {
                             if (text == null || text.isEmpty) {
@@ -118,31 +119,31 @@ class _LoginPageState extends State<LoginPage> {
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide(
-                                  color: Colors.white,
+                                  color: secondaryColor,
                                   width: 2,
                                 )),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide(
-                                  color: Colors.white,
+                                  color: secondaryColor,
                                   width: 2,
                                 )),
-                            focusColor: Colors.white,
+                            focusColor: secondaryColor,
                             hintText: "Password",
                             labelText: 'Password',
                             labelStyle: TextStyle(
-                              color: Colors.white,
+                              color: secondaryColor,
                             ),
-                            prefixIcon: Icon(Icons.lock, color: Colors.white),
+                            prefixIcon: Icon(Icons.lock, color: secondaryColor),
                             suffixIcon: IconButton(
                               icon: _isObpass
                                   ? Icon(
                                       Icons.visibility,
-                                      color: Colors.white,
+                                      color: secondaryColor,
                                     )
                                   : Icon(
                                       Icons.visibility_off,
-                                      color: Colors.white,
+                                      color: secondaryColor,
                                     ),
                               onPressed: () {
                                 setState(
@@ -187,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                                             user = list_user[i],
                                             pref.setString('id', user.id.toString()),
                                             pref.setString('nama', user.nama.toString()),
-                                            pref.setString('role', user.role.toString()),
+                                            pref.setString('role', user.role!),
                                             pref.setBool('login', true),
                                           },
                                           
@@ -211,14 +212,14 @@ class _LoginPageState extends State<LoginPage> {
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                                primary: Colors.white,
+                                primary: secondaryColor,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(17))),
                             child: Text('Login',
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black.withRed(100))),
+                                    color: primaryColor)),
                           ),
                         ),
                       ),
@@ -230,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Text("Don’t have an account?",
                               style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
+                                  TextStyle(fontSize: 18, color: secondaryColor)),
                           InkWell(
                             onTap: () {
                               Navigator.push(
@@ -243,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: Text(" Register",
                                 style: TextStyle(
                                     fontSize: 18,
-                                    color: Colors.white,
+                                    color: secondaryColor,
                                     fontWeight: FontWeight.bold,
                                     decoration: TextDecoration.underline)),
                           ),

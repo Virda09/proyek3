@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyek3/color.dart';
 
 class MenuIcon extends StatelessWidget {
   const MenuIcon({
@@ -6,10 +7,11 @@ class MenuIcon extends StatelessWidget {
     required this.aksi,
     required this.title,
     required this.icon,
+    required this.role,
   });
 
   final Widget aksi;
-  final String title;
+  final String title, role;
   final IconData icon;
 
   @override
@@ -23,36 +25,39 @@ class MenuIcon extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        margin: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [
-                Color.fromARGB(255, 119, 1, 1),
-                Color.fromARGB(255, 197, 49, 38)
-              ],
-              begin: Alignment.bottomLeft,
-              end: Alignment.centerRight,
-            ),
-            borderRadius: BorderRadius.circular(10)),
-        height: 80,
-        width: 100,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.all(5),
+            decoration: role == "warga"
+                ? BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: secondaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                  )
+                : BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: secondaryColor,
+                  ),
+            height: 70,
+            width: role == "warga" ? 100 : 70,
+            child: Center(
+              child: Icon(
                 icon,
-                color: Colors.white,
+                color: primaryColor,
                 size: 40,
               ),
-              Text(
-                title,
-                style: const TextStyle(color: Colors.white, fontSize: 14),
-              ),
-            ],
+            ),
           ),
-        ),
+          Text(
+            title,
+            style: TextStyle(
+              color: secondaryColor,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }

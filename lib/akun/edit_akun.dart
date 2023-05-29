@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:proyek3/akun/akun_page.dart';
 import 'package:proyek3/akun/alert.dart';
+import 'package:proyek3/color.dart';
 import 'package:proyek3/komponents/build_dropdown.dart';
 import 'package:proyek3/komponents/build_textfield.dart';
 import 'package:proyek3/model/api_service.dart';
@@ -148,12 +149,12 @@ class _EditAkunPageState extends State<EditAkunPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black.withRed(100),
+        backgroundColor: primaryColor,
         elevation: 0,
         title: Text(
           "Edit Akun",
           style: TextStyle(
-              fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+              fontSize: 28, fontWeight: FontWeight.bold, color: secondaryColor),
         ),
       ),
       key: _scaffold,
@@ -163,14 +164,19 @@ class _EditAkunPageState extends State<EditAkunPage> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.black.withRed(100),
+                color: primaryColor,
+                image: const DecorationImage(
+                  opacity: 0.5,
+                  image: AssetImage('assets/bg2.jpg'),
+                  fit: BoxFit.fill,
+                ),
               ),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: secondaryColor,
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -180,7 +186,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                         Text(
                           "Biodata Diri",
                           style: TextStyle(
-                            color: Colors.black.withRed(100),
+                            color: primaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
                           ),
@@ -255,7 +261,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                 myAlert();
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.black.withRed(100),
+                                primary: primaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(10),
@@ -267,7 +273,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white)),
+                                      color: secondaryColor)),
                             ),
                           ),
                         ),
@@ -292,7 +298,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                         }
                                       },
                                       input: TextInputType.name,
-                                      color: Colors.black.withRed(100),
+                                      color: primaryColor,
                                     ),
                                   ),
                                   SizedBox(
@@ -312,7 +318,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                         }
                                       },
                                       input: TextInputType.name,
-                                      color: Colors.black.withRed(100),
+                                      color: primaryColor,
                                     ),
                                   ),
                                   SizedBox(
@@ -322,8 +328,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 20),
                                     child: TextFormField(
-                                      style: TextStyle(
-                                          color: Colors.black.withRed(100)),
+                                      style: TextStyle(color: primaryColor),
                                       controller: tanggalLahir,
                                       readOnly: true,
                                       onTap: () async {
@@ -349,24 +354,24 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                             borderSide: BorderSide(
-                                              color: Colors.black.withRed(100),
+                                              color: primaryColor,
                                               width: 2,
                                             )),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           borderSide: BorderSide(
-                                            color: Colors.black.withRed(100),
+                                            color: primaryColor,
                                             width: 2,
                                           ),
                                         ),
-                                        focusColor: Colors.black.withRed(100),
+                                        focusColor: primaryColor,
                                         labelText: "Tanggal Lahir",
                                         labelStyle: TextStyle(
-                                          color: Colors.black.withRed(100),
+                                          color: primaryColor,
                                         ),
                                         prefixIcon: Icon(Icons.date_range,
-                                            color: Colors.black.withRed(100)),
+                                            color: primaryColor),
                                       ),
                                       validator: (text) {
                                         if (text == null || text.isEmpty) {
@@ -389,7 +394,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                       icon: jenisKelamin == "Laki-laki"
                                           ? Icons.male_sharp
                                           : Icons.female_sharp,
-                                      color: Colors.black.withRed(100),
+                                      color: primaryColor,
                                       aksi: (val) {
                                         setState(() => jenisKelamin = val!);
                                       },
@@ -412,33 +417,32 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                     child: TextFormField(
                                       maxLines: null,
                                       keyboardType: TextInputType.multiline,
-                                      style: TextStyle(
-                                          color: Colors.black.withRed(100)),
+                                      style: TextStyle(color: primaryColor),
                                       controller: alamat,
                                       decoration: InputDecoration(
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                             borderSide: BorderSide(
-                                              color: Colors.black.withRed(100),
+                                              color: primaryColor,
                                               width: 2,
                                             )),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           borderSide: BorderSide(
-                                            color: Colors.black.withRed(100),
+                                            color: primaryColor,
                                             width: 2,
                                           ),
                                         ),
-                                        focusColor: Colors.black.withRed(100),
+                                        focusColor: primaryColor,
                                         labelText: "Alamat",
                                         hintText: "Alamat",
                                         labelStyle: TextStyle(
-                                          color: Colors.black.withRed(100),
+                                          color: primaryColor,
                                         ),
                                         prefixIcon: Icon(Icons.location_on,
-                                            color: Colors.black.withRed(100)),
+                                            color: primaryColor),
                                       ),
                                       validator: (text) {
                                         if (text == null || text.isEmpty) {
@@ -471,7 +475,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                                               .temple_buddhist
                                                           : Icons
                                                               .temple_buddhist,
-                                      color: Colors.black.withRed(100),
+                                      color: primaryColor,
                                       aksi: (val) {
                                         setState(() => agama = val!);
                                       },
@@ -498,7 +502,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                       icon: status == "Menikah"
                                           ? Icons.group_rounded
                                           : Icons.person,
-                                      color: Colors.black.withRed(100),
+                                      color: primaryColor,
                                       aksi: (val) {
                                         setState(() => status = val!);
                                       },
@@ -529,7 +533,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                         }
                                       },
                                       input: TextInputType.phone,
-                                      color: Colors.black.withRed(100),
+                                      color: primaryColor,
                                     ),
                                   ),
                                   SizedBox(
@@ -549,7 +553,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                         }
                                       },
                                       input: TextInputType.name,
-                                      color: Colors.black.withRed(100),
+                                      color: primaryColor,
                                     ),
                                   ),
                                   SizedBox(
@@ -611,7 +615,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                           }
                                         },
                                         style: ElevatedButton.styleFrom(
-                                            primary: Colors.black.withRed(100),
+                                            primary: primaryColor,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(17))),
@@ -619,7 +623,7 @@ class _EditAkunPageState extends State<EditAkunPage> {
                                             style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500,
-                                                color: Colors.white)),
+                                                color: secondaryColor)),
                                       ),
                                     ),
                                   ),

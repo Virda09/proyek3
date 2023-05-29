@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:proyek3/color.dart';
 import 'package:proyek3/komponents/build_textfield.dart';
 import 'package:proyek3/model/api_service.dart';
 import 'package:proyek3/model/aspirasi.dart';
@@ -39,12 +40,12 @@ class _ShowPageState extends State<ShowPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black.withRed(100),
+        backgroundColor: primaryColor,
         elevation: 0,
         title: Text(
           'Data Aspirasi',
           style: TextStyle(
-              fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+              fontSize: 28, fontWeight: FontWeight.bold, color: secondaryColor),
         ),
       ),
       key: _scaffold,
@@ -52,7 +53,14 @@ class _ShowPageState extends State<ShowPage> {
         child: Container(
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(color: Colors.black.withRed(100)),
+          decoration: BoxDecoration(
+            color: primaryColor,
+            image: const DecorationImage(
+              opacity: 0.5,
+              image: AssetImage('assets/bg2.jpg'),
+              fit: BoxFit.fill,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -61,7 +69,7 @@ class _ShowPageState extends State<ShowPage> {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: secondaryColor,
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -71,7 +79,7 @@ class _ShowPageState extends State<ShowPage> {
                         Text(
                           "Detail Aspirasi",
                           style: TextStyle(
-                            color: Colors.black.withRed(100),
+                            color: primaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
                           ),
@@ -86,7 +94,7 @@ class _ShowPageState extends State<ShowPage> {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 child: BuildTextField(
-                                  color: Colors.black.withRed(100),
+                                  color: primaryColor,
                                   con: nama,
                                   hint: 'Nama Inisial',
                                   icon: Icons.person,
@@ -100,7 +108,7 @@ class _ShowPageState extends State<ShowPage> {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 child: BuildTextField(
-                                  color: Colors.black.withRed(100),
+                                  color: primaryColor,
                                   con: jenis_aspirasi,
                                   hint: 'Jenis Aspirasi',
                                   icon: Icons.speaker_notes,
@@ -114,7 +122,7 @@ class _ShowPageState extends State<ShowPage> {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 child: BuildTextField(
-                                  color: Colors.black.withRed(100),
+                                  color: primaryColor,
                                   con: tanggal,
                                   hint: 'Tanggal Dibuat',
                                   icon: Icons.date_range,
@@ -131,30 +139,30 @@ class _ShowPageState extends State<ShowPage> {
                                   readOnly: true,
                                   maxLines: null,
                                   style: TextStyle(
-                                      color: Colors.black.withRed(100)),
+                                      color: primaryColor),
                                   controller: aspirasi,
                                   decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
                                         borderSide: BorderSide(
-                                          color: Colors.black.withRed(100),
+                                          color: primaryColor,
                                           width: 2,
                                         )),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide(
-                                        color: Colors.black.withRed(100),
+                                        color: primaryColor,
                                         width: 2,
                                       ),
                                     ),
-                                    focusColor: Colors.black.withRed(100),
+                                    focusColor: primaryColor,
                                     labelText: "Pesan Aspirasi",
                                     hintText: "Pesan Aspirasi",
                                     labelStyle: TextStyle(
-                                      color: Colors.black.withRed(100),
+                                      color: primaryColor,
                                     ),
                                     prefixIcon: Icon(Icons.speaker_notes,
-                                        color: Colors.black.withRed(100)),
+                                        color: primaryColor),
                                   ),
                                 ),
                               ),

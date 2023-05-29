@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:proyek3/color.dart';
 import 'package:proyek3/home/home_page.dart';
 import 'package:proyek3/iuran/add_edit_page.dart';
 import 'package:proyek3/iuran/show_page.dart';
@@ -28,9 +29,9 @@ class _IuranPageState extends State<IuranPage> {
     pref = await SharedPreferences.getInstance();
     id = pref.getString('id')!;
     role = pref.getString('role')!;
-    if(role == 'warga'){
+    if (role == 'warga') {
       id_warga = id;
-    }else{
+    } else {
       id_warga = pref.getString('id_warga')!;
     }
     setState(() {
@@ -63,9 +64,9 @@ class _IuranPageState extends State<IuranPage> {
                           : const WargaPage()),
                   (route) => false);
             },
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back,
-              color: Colors.white,
+              color: secondaryColor,
             )),
         automaticallyImplyLeading: false,
         actions: [
@@ -80,65 +81,76 @@ class _IuranPageState extends State<IuranPage> {
                 ),
               );
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.add,
-              color: Colors.white,
+              color: secondaryColor,
             ),
           ),
         ],
       ),
       body: SafeArea(
-        child: _isLoading
-            ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    CircularProgressIndicator(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text("Loading..."),
-                  ],
-                ),
-              )
-            : FutureBuilder(
-                future: _apiService.getIuran(id_warga),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<Iuran>> snapshot) {
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text(
-                          "Something wrong with message: ${snapshot.error.toString()}"),
-                    );
-                  } else if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.data!.isEmpty) {
+        child: Container(
+          decoration: BoxDecoration(
+            color: primaryColor,
+            image: const DecorationImage(
+              opacity: 0.5,
+              image: AssetImage('assets/bg2.jpg'),
+              fit: BoxFit.fill,
+            ),
+          ),
+          child: _isLoading
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      CircularProgressIndicator(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("Loading..."),
+                    ],
+                  ),
+                )
+              : FutureBuilder(
+                  future: _apiService.getIuran(id_warga),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<Iuran>> snapshot) {
+                    if (snapshot.hasError) {
                       return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              Icons.speaker_notes,
-                              size: 60,
-                              color: Colors.grey,
-                            ),
-                            SizedBox(height: 5),
-                            Text("Data Kosong",
-                                style: TextStyle(
-                                    color: Colors.grey, fontSize: 20)),
-                          ],
-                        ),
+                        child: Text(
+                            "Something wrong with message: ${snapshot.error.toString()}"),
                       );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.done) {
+                      if (snapshot.data!.isEmpty) {
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.speaker_notes,
+                                size: 60,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(height: 5),
+                              Text("Data Kosong",
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 20)),
+                            ],
+                          ),
+                        );
+                      } else {
+                        List<Iuran>? iuran = snapshot.data;
+                        return _buildListView(iuran!);
+                      }
                     } else {
-                      List<Iuran>? iuran = snapshot.data;
-                      return _buildListView(iuran!);
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
                     }
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
+                  },
+                ),
+        ),
       ),
     );
   }
@@ -162,30 +174,11 @@ class _IuranPageState extends State<IuranPage> {
               );
             },
             child: Padding(
-              padding: const EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.only(top: 15.0),
               child: Container(
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 119, 1, 1),
-                      Color.fromARGB(255, 197, 49, 38)
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
+                  color: secondaryColor,
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 20,
-                      offset: Offset(4, 5),
-                      color: Colors.black45,
-                    ),
-                    BoxShadow(
-                      blurRadius: 10,
-                      offset: Offset(-1, -5),
-                      color: Colors.black45,
-                    )
-                  ],
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -194,8 +187,8 @@ class _IuranPageState extends State<IuranPage> {
                     children: <Widget>[
                       Text(
                         "Tanggal : ${_apiService.dateFormat((data.created_at ?? ""))}",
-                        style: const TextStyle(
-                            color: Colors.white,
+                        style: TextStyle(
+                            color: primaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                         maxLines: 2,
@@ -206,15 +199,15 @@ class _IuranPageState extends State<IuranPage> {
                       ),
                       Text(
                         "Nominal : ${data.nominal}",
-                        style: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: primaryColor, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 7),
                       Row(
                         children: [
-                          const Text(
+                          Text(
                             "Status : ",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: primaryColor),
                           ),
                           Text(
                             data.status,
@@ -222,7 +215,7 @@ class _IuranPageState extends State<IuranPage> {
                                 ? const TextStyle(color: Colors.green)
                                 : data.status == "Ditolak"
                                     ? const TextStyle(color: Colors.red)
-                                    : const TextStyle(color: Colors.white),
+                                    : const TextStyle(color: Colors.blue),
                           ),
                         ],
                       ),
@@ -233,7 +226,7 @@ class _IuranPageState extends State<IuranPage> {
                           children: [
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
+                                backgroundColor: primaryColor,
                               ),
                               onPressed: () {
                                 showDialog(
@@ -246,13 +239,12 @@ class _IuranPageState extends State<IuranPage> {
                                         actions: <Widget>[
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  Colors.black.withRed(100),
+                                              backgroundColor: primaryColor,
                                             ),
-                                            child: const Text(
+                                            child: Text(
                                               "Ya",
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                  color: secondaryColor),
                                             ),
                                             onPressed: () {
                                               Navigator.pop(context);
@@ -279,13 +271,12 @@ class _IuranPageState extends State<IuranPage> {
                                           ),
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  Colors.black.withRed(100),
+                                              backgroundColor: primaryColor,
                                             ),
-                                            child: const Text(
+                                            child: Text(
                                               "Tidak",
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                  color: secondaryColor),
                                             ),
                                             onPressed: () {
                                               Navigator.pop(context);
@@ -296,15 +287,15 @@ class _IuranPageState extends State<IuranPage> {
                                     });
                               },
                               child: Row(
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.highlight_remove,
-                                    color: Colors.red,
+                                    color: secondaryColor,
                                   ),
-                                  SizedBox(width: 5),
+                                  const SizedBox(width: 5),
                                   Text(
                                     "Hapus",
-                                    style: TextStyle(color: Colors.red),
+                                    style: TextStyle(color: secondaryColor),
                                   ),
                                 ],
                               ),
@@ -314,7 +305,7 @@ class _IuranPageState extends State<IuranPage> {
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
+                                backgroundColor: primaryColor,
                               ),
                               onPressed: () {
                                 Navigator.push(
@@ -328,12 +319,12 @@ class _IuranPageState extends State<IuranPage> {
                                 );
                               },
                               child: Row(
-                                children: const [
-                                  Icon(Icons.edit, color: Colors.blue),
-                                  SizedBox(width: 5),
+                                children:  [
+                                  Icon(Icons.edit, color: secondaryColor),
+                                  const SizedBox(width: 5),
                                   Text(
                                     "Edit",
-                                    style: TextStyle(color: Colors.blue),
+                                    style: TextStyle(color: secondaryColor),
                                   ),
                                 ],
                               ),

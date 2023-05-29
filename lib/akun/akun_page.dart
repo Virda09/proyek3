@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:proyek3/akun/edit_akun.dart';
 import 'package:proyek3/akun/edit_password.dart';
 import 'package:proyek3/auth/login_page.dart';
+import 'package:proyek3/color.dart';
 import 'package:proyek3/home/home_page.dart';
 import 'package:proyek3/model/api_service.dart';
 import 'package:proyek3/model/warga.dart';
@@ -21,7 +22,7 @@ class _AkunPageState extends State<AkunPage> {
   final ApiService _apiService = ApiService();
   List<Warga> data = [];
   late Warga warga;
-  late String id,role,nama;
+  late String id, role, nama;
   bool _isLoading = true;
 
   _getAkun() async {
@@ -45,7 +46,7 @@ class _AkunPageState extends State<AkunPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Akun"),
-        backgroundColor: Colors.black.withRed(120),
+        backgroundColor: primaryColor,
         elevation: 0,
         leading: InkWell(
             onTap: () {
@@ -56,11 +57,11 @@ class _AkunPageState extends State<AkunPage> {
             },
             child: Icon(
               Icons.arrow_back,
-              color: Colors.white,
+              color: secondaryColor,
             )),
         automaticallyImplyLeading: false,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: secondaryColor,
       body: _isLoading
           ? Center(
               child: Column(
@@ -75,7 +76,7 @@ class _AkunPageState extends State<AkunPage> {
               ),
             )
           : FutureBuilder<List<Warga>>(
-              future: _apiService.getAkun(id,role),
+              future: _apiService.getAkun(id, role),
               builder: (context, AsyncSnapshot<List<Warga>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (!snapshot.hasData) {
@@ -119,72 +120,65 @@ class _AkunPageState extends State<AkunPage> {
                     ],
                   ));
                 }
-                if(role == 'warga'){
-                   pref.setString('id_warga', snapshot.data![0].id.toString());
+                if (role == 'warga') {
+                  pref.setString('id_warga', snapshot.data![0].id.toString());
                 }
-                return Column(
+                return Container(
+                  decoration: BoxDecoration(
+                    color: primaryColor,
+                    image: DecorationImage(
+                      opacity: 0.5,
+                      image: AssetImage('assets/bg2.jpg'),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 250,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: const [
-                                Color.fromARGB(255, 119, 1, 1),
-                                Color.fromARGB(255, 197, 49, 38)
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                          top: 25,
+                          right: 20,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                                child: role == 'warga'
+                                    ? CircleAvatar(
+                                        radius: 60,
+                                        backgroundImage: NetworkImage(
+                                            snapshot.data![0].photo),
+                                      )
+                                    : CircleAvatar(
+                                        backgroundColor: secondaryColor,
+                                        radius: 60,
+                                        child: Icon(
+                                          Icons.person,
+                                          color: primaryColor,
+                                          size: 80,
+                                        ),
+                                      )),
+                            SizedBox(
+                              height: 20,
                             ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(50),
-                              bottomRight: Radius.circular(50),
+                            Center(
+                              child: Text(
+                                role == 'warga'
+                                    ? snapshot.data![0].nama_lengkap
+                                    : nama,
+                                style: TextStyle(
+                                    color: secondaryColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
                             ),
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(5, 10),
-                                blurRadius: 20,
-                                color: Color.fromARGB(31, 105, 104, 104),
-                              ),
-                            ]),
-                        child: Container(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            top: 25,
-                            right: 20,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Center(
-                                child: role == 'warga' ? CircleAvatar(
-                                  radius: 60,
-                                  backgroundImage: 
-                                      NetworkImage(snapshot.data![0].photo),
-                                ): CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 60,
-                                  child: Icon(Icons.person,color: Colors.black.withRed(100),size: 80,),
-                                )
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Center(
-                                child: Text(
-                                  role == 'warga' ? snapshot.data![0].nama_lengkap : nama,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                            ],
-                          ),
+                          ],
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 30,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 30),
@@ -193,7 +187,7 @@ class _AkunPageState extends State<AkunPage> {
                             child: Text(
                               "Menu",
                               style: TextStyle(
-                                  color: Colors.black.withRed(100),
+                                  color: secondaryColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 28),
                             )),
@@ -229,14 +223,14 @@ class _AkunPageState extends State<AkunPage> {
                                 );
                               },
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black.withRed(150),
+                                  backgroundColor: secondaryColor,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(17))),
                               child: Text('Edit Akun',
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white)),
+                                      color: primaryColor)),
                             ),
                           ),
                         ),
@@ -257,14 +251,14 @@ class _AkunPageState extends State<AkunPage> {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black.withRed(150),
+                                backgroundColor: secondaryColor,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(17))),
                             child: Text('Edit Password',
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white)),
+                                    color: primaryColor)),
                           ),
                         ),
                       ),
@@ -287,22 +281,24 @@ class _AkunPageState extends State<AkunPage> {
                                   (route) => false);
                             },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey,
+                                backgroundColor: secondaryColor,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(17))),
                             child: Text('Logout',
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white)),
+                                    color: primaryColor)),
                           ),
                         ),
                       ),
                       SizedBox(height: 10),
                     ],
+                  ),
                 );
               },
             ),
     );
   }
 }
+

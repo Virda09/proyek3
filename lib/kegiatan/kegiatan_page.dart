@@ -1,36 +1,33 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:proyek3/aspirasi/add_edit_page.dart';
-import 'package:proyek3/aspirasi/show_page.dart';
 import 'package:proyek3/color.dart';
 import 'package:proyek3/home/home_page.dart';
+import 'package:proyek3/home/show_page.dart';
+import 'package:proyek3/kegiatan/add_edit_page.dart';
 import 'package:proyek3/model/api_service.dart';
-import 'package:proyek3/model/aspirasi.dart';
+import 'package:proyek3/model/kegiatan.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AspirasiPage extends StatefulWidget {
-  const AspirasiPage({super.key});
+class KegiatanPage extends StatefulWidget {
+  const KegiatanPage({super.key});
 
   @override
-  State<AspirasiPage> createState() => _AspirasiPageState();
+  State<KegiatanPage> createState() => _KegiatanPageState();
 }
 
-class _AspirasiPageState extends State<AspirasiPage> {
+class _KegiatanPageState extends State<KegiatanPage> {
   @override
   late BuildContext context;
   late ApiService _apiService;
   late SharedPreferences pref;
-  late String id, id_warga, role;
+  late String id, role;
   bool _isLoading = true;
 
   _getAkun() async {
     pref = await SharedPreferences.getInstance();
     id = pref.getString('id')!;
     role = pref.getString('role')!;
-    if (role == 'warga') {
-      id_warga = id;
-    }
     setState(() {
       _isLoading = false;
     });
@@ -48,7 +45,7 @@ class _AspirasiPageState extends State<AspirasiPage> {
     this.context = context;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("List Aspirasi"),
+        title: const Text("List Kegiatan / Berita"),
         backgroundColor: Colors.black.withRed(120),
         elevation: 0,
         leading: InkWell(
@@ -90,9 +87,9 @@ class _AspirasiPageState extends State<AspirasiPage> {
               : Stack(
                   children: [
                     FutureBuilder(
-                      future: _apiService.getAspirasi(id, role),
+                      future: _apiService.getKegiatan(),
                       builder: (BuildContext context,
-                          AsyncSnapshot<List<Aspirasi>> snapshot) {
+                          AsyncSnapshot<List<Kegiatan>> snapshot) {
                         if (snapshot.hasError) {
                           return Center(
                             child: Text(
@@ -104,22 +101,22 @@ class _AspirasiPageState extends State<AspirasiPage> {
                             return Center(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.speaker_notes,
                                     size: 60,
-                                    color: Colors.grey,
+                                    color: secondaryColor,
                                   ),
-                                  SizedBox(height: 5),
-                                  Text("Data Kosong",
+                                  const SizedBox(height: 5),
+                                  Text("Tidak Ada Berita atau Kegiatan",
                                       style: TextStyle(
-                                          color: Colors.grey, fontSize: 20)),
+                                          color: secondaryColor, fontSize: 20)),
                                 ],
                               ),
                             );
                           } else {
-                            List<Aspirasi>? aspirasi = snapshot.data;
-                            return _buildListView(aspirasi!);
+                            List<Kegiatan>? kegiatan = snapshot.data;
+                            return _buildListView(kegiatan!);
                           }
                         } else {
                           return const Center(
@@ -128,7 +125,7 @@ class _AspirasiPageState extends State<AspirasiPage> {
                         }
                       },
                     ),
-                    role == 'warga'
+                    role == 'koordinator'
                         ? SizedBox(
                             height: MediaQuery.of(context).size.height,
                             width: double.infinity,
@@ -146,9 +143,8 @@ class _AspirasiPageState extends State<AspirasiPage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => AddEditPage(
-                                              id_warga: id_warga,
-                                            ),
+                                            builder: (context) =>
+                                                const AddEditPage(),
                                           ),
                                         );
                                       },
@@ -157,7 +153,7 @@ class _AspirasiPageState extends State<AspirasiPage> {
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(17))),
-                                      child: Text('Buat Aspirasi',
+                                      child: Text('Buat Kegiatan / Berita',
                                           style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.w500,
@@ -177,93 +173,94 @@ class _AspirasiPageState extends State<AspirasiPage> {
     );
   }
 
-  Widget _buildListView(List<Aspirasi> aspirasi) {
+  Widget _buildListView(List<Kegiatan> kegiatan) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      padding: const EdgeInsets.all(10.0),
       child: ListView.builder(
         itemBuilder: (context, index) {
-          Aspirasi data = aspirasi[index];
+          Kegiatan data = kegiatan[index];
           return InkWell(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ShowPage(
-                    id_warga: id_warga,
-                    aspirasi: data,
+                    kegiatan: data,
                   ),
                 ),
               );
             },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: secondaryColor,
-                  borderRadius: BorderRadius.circular(10),
-                  ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Text(
-                            "Nama : ${data.nama}",
-                            style: TextStyle(
-                                color: primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Expanded(child: Container()),
-                          Text(
-                            _apiService.dateFormat((data.created_at ?? "")),
-                            style: TextStyle(color: primaryColor),
-                          ),
-                        ],
+            child: Container(
+              margin: const EdgeInsets.only(top: 15),
+              decoration: BoxDecoration(
+                color: secondaryColor,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: primaryColor, width: 3)),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Icon(Icons.newspaper,
+                            color: primaryColor, size: 40),
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Jenis Aspirasi : ${data.jenis_aspirasi}",
-                            style: TextStyle(
-                                color: primaryColor,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Expanded(child: Container()),
-                          Row(
-                            children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical:20,horizontal:10),
+                        child: SizedBox(
+                          width: 200,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
                               Text(
-                                "Status : ",
-                                style: TextStyle(color: primaryColor),
+                                data.nama,
+                                style: TextStyle(
+                                    color: primaryColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(
+                                height: 5,
                               ),
                               Text(
-                                data.status,
-                                style: data.status == "Dibaca"
-                                    ? const TextStyle(color: Colors.green)
-                                    : const TextStyle(color: Colors.red),
+                                _apiService.dateFormat((data.created_at ?? "")),
+                                style: TextStyle(
+                                  color: primaryColor,
+                                ),
                               ),
+                              const SizedBox(height: 7),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Deskripsi : ",
+                                    style: TextStyle(color: primaryColor),
+                                  ),
+                                  Text(
+                                    data.deskripsi,
+                                    style: TextStyle(color: primaryColor),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
                             ],
                           ),
-                        ],
+                        ),
                       ),
-                      const SizedBox(height: 7),
-                      Text(
-                        data.aspirasi,
-                        style: TextStyle(color: primaryColor, fontSize: 14),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 10),
-                      if (data.status != "Dibaca" && role == 'warga')
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                      Expanded(child: Container()),
+                      Padding(
+                        padding: const EdgeInsets.only(right:8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -276,7 +273,7 @@ class _AspirasiPageState extends State<AspirasiPage> {
                                       return AlertDialog(
                                         title: const Text("Warning"),
                                         content: Text(
-                                            "Anda yakin ingin menghapus Aspirasi dengan inisial : ${data.nama}"),
+                                            "Anda yakin ingin menghapus kegiatan/berita dengan judul : ${data.nama}"),
                                         actions: <Widget>[
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
@@ -290,7 +287,7 @@ class _AspirasiPageState extends State<AspirasiPage> {
                                             onPressed: () {
                                               Navigator.pop(context);
                                               _apiService
-                                                  .deleteAspirasi(
+                                                  .deleteKegiatan(
                                                       data.id.toString())
                                                   .then((isSuccess) {
                                                 if (isSuccess) {
@@ -353,8 +350,7 @@ class _AspirasiPageState extends State<AspirasiPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => AddEditPage(
-                                      id_warga: id_warga,
-                                      aspirasi: data,
+                                      kegiatan: data,
                                     ),
                                   ),
                                 );
@@ -371,7 +367,8 @@ class _AspirasiPageState extends State<AspirasiPage> {
                               ),
                             ),
                           ],
-                        )
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -379,7 +376,7 @@ class _AspirasiPageState extends State<AspirasiPage> {
             ),
           );
         },
-        itemCount: aspirasi.length,
+        itemCount: kegiatan.length,
       ),
     );
   }

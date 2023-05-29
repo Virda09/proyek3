@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:proyek3/akun/alert.dart';
+import 'package:proyek3/color.dart';
 import 'package:proyek3/komponents/build_textfield.dart';
 import 'package:proyek3/iuran/iuran_page.dart';
 import 'package:proyek3/model/api_service.dart';
@@ -99,12 +100,12 @@ class _AddEditPageState extends State<AddEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black.withRed(100),
+        backgroundColor: primaryColor,
         elevation: 0,
         title: Text(
           widget.iuran == null ? 'Tambah Iuran' : "Edit Iuran",
           style: TextStyle(
-              fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+              fontSize: 28, fontWeight: FontWeight.bold, color: secondaryColor),
         ),
       ),
       key: _scaffold,
@@ -114,16 +115,23 @@ class _AddEditPageState extends State<AddEditPage> {
             child: Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(color: Colors.black.withRed(100)),
+              decoration: BoxDecoration(
+                color: primaryColor,
+                image: const DecorationImage(
+                  opacity: 0.5,
+                  image: AssetImage('assets/bg2.jpg'),
+                  fit: BoxFit.fill,
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: secondaryColor,
                           borderRadius: BorderRadius.circular(20)),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -133,7 +141,7 @@ class _AddEditPageState extends State<AddEditPage> {
                             Text(
                               "Form Iuran",
                               style: TextStyle(
-                                color: Colors.black.withRed(100),
+                                color: primaryColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
                               ),
@@ -141,7 +149,7 @@ class _AddEditPageState extends State<AddEditPage> {
                             SizedBox(
                               height: 10,
                             ),
-                            bukti != "" || image!=null
+                            bukti != "" || image != null
                                 ? Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20),
@@ -180,7 +188,8 @@ class _AddEditPageState extends State<AddEditPage> {
                                       ),
                                       child: Container(
                                         color: Colors.grey.shade300,
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         height: 300,
                                         child: Icon(
                                           Icons.image,
@@ -200,7 +209,7 @@ class _AddEditPageState extends State<AddEditPage> {
                                     myAlert();
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.black.withRed(100),
+                                    primary: primaryColor,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(10),
@@ -212,7 +221,7 @@ class _AddEditPageState extends State<AddEditPage> {
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.white)),
+                                          color: secondaryColor)),
                                 ),
                               ),
                             ),
@@ -237,25 +246,28 @@ class _AddEditPageState extends State<AddEditPage> {
                                           }
                                         },
                                         input: TextInputType.number,
-                                        color: Colors.black.withRed(100),
+                                        color: primaryColor,
                                       ),
                                     ),
                                     SizedBox(
                                       height: 20,
                                     ),
-                
+
                                     // NOTE: BUTTON REGISTER
                                     Padding(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 20),
                                       child: SizedBox(
                                         height: 60,
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         child: ElevatedButton(
                                           onPressed: () {
                                             final isValid =
                                                 _form.currentState?.validate();
-                                            if (!isValid! && (image != null && bukti != "")) {
+                                            if (!isValid! &&
+                                                (image != null &&
+                                                    bukti != "")) {
                                               return;
                                             } else {
                                               setState(() => _isLoading = true);
@@ -273,8 +285,8 @@ class _AddEditPageState extends State<AddEditPage> {
                                                             : null)
                                                     .then(
                                                   (isSuccess) {
-                                                    setState(
-                                                        () => _isLoading = false);
+                                                    setState(() =>
+                                                        _isLoading = false);
                                                     if (isSuccess) {
                                                       Navigator.push(
                                                         context,
@@ -301,8 +313,8 @@ class _AddEditPageState extends State<AddEditPage> {
                                                             : null)
                                                     .then(
                                                   (isSuccess) {
-                                                    setState(
-                                                        () => _isLoading = false);
+                                                    setState(() =>
+                                                        _isLoading = false);
                                                     if (isSuccess) {
                                                       Navigator.push(
                                                         context,
@@ -322,15 +334,16 @@ class _AddEditPageState extends State<AddEditPage> {
                                             }
                                           },
                                           style: ElevatedButton.styleFrom(
-                                              primary: Colors.black.withRed(100),
+                                              primary: primaryColor,
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(17))),
+                                                      BorderRadius.circular(
+                                                          17))),
                                           child: Text("Simpan".toUpperCase(),
                                               style: TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w500,
-                                                  color: Colors.white)),
+                                                  color: secondaryColor)),
                                         ),
                                       ),
                                     ),
