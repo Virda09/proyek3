@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiAspirasiController extends Controller
 {
+    public function index(){
+        $post = Aspirasi::orderBy('created_at', 'asc')->get();
+        return new PostResource(true, 'List Data Aspirasi', $post);
+    }
+
     public function listAspirasi($id)
     {
         $post = Aspirasi::where('id_warga', $id)->get();

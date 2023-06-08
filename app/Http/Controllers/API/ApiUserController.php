@@ -12,12 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiUserController extends Controller
 {
-    public function index()
-    {
-        $post = Warga::all();
-        return new PostResource(true, 'List Data Warga', $post);
-    }
-
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [

@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\ApiAspirasiController;
 use App\Http\Controllers\Api\ApiIuranController;
 use App\Http\Controllers\Api\ApiWargaController;
+use App\Http\Controllers\Api\ApiKegiatanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::post('/login', App\Http\Controllers\Api\ApiLoginController::class);
 Route::get('/list-aspirasi/{id}',[ApiAspirasiController::class, 'listAspirasi']);
 Route::get('/list-iuran/{id}',[ApiIuranController::class, 'listIuran']);
 Route::get('/verifikasi/{id}{value}',[ApiIuranController::class, 'verifikasi']);
+Route::get('/activity',[ApiKegiatanController::class, 'activity']);
 Route::post('/updateAkun',[ApiWargaController::class, 'updateAkun']);
 Route::post('/update-iuran',[ApiIuranController::class, 'updateIuran']);
 

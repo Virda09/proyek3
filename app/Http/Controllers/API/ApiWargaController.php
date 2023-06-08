@@ -15,6 +15,12 @@ use Nette\Utils\DateTime;
 
 class ApiWargaController extends Controller
 {
+    public function index()
+    {
+        $post = Warga::all();
+        return new PostResource(true, 'List Data Warga', $post);
+    }
+    
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
