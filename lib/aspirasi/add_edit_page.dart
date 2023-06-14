@@ -27,19 +27,19 @@ class _AddEditPageState extends State<AddEditPage> {
 
   final Alert alert = Alert();
 
-  late String jenisAspirasi;
+  // late String jenisAspirasi;
 
   bool _isLoading = false;
 
-  List<String> jenis_aspirasi = ["Keamanan", "Kebersihan", 'Ketetanggaan'];
+  // List<String> jenis_aspirasi = ["Keamanan", "Kebersihan", 'Ketetanggaan'];
 
   final GlobalKey<ScaffoldState> _scaffold = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
-    jenisAspirasi = jenis_aspirasi[0];
+    // jenisAspirasi = jenis_aspirasi[0];
     if (widget.aspirasi != null) {
-      jenisAspirasi = widget.aspirasi!.jenis_aspirasi;
+      // jenisAspirasi = widget.aspirasi!.jenis_aspirasi;
       nama.text = widget.aspirasi!.nama;
       aspirasi.text = widget.aspirasi!.aspirasi;
     }
@@ -124,31 +124,31 @@ class _AddEditPageState extends State<AddEditPage> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    child: BuildDropdown(
-                                      val: jenisAspirasi,
-                                      hint: "Jenis Aspirasi",
-                                      label: "Jenis Aspirasi",
-                                      icon: Icons.speaker_notes_outlined,
-                                      color: primaryColor,
-                                      aksi: (val) {
-                                        setState(() => jenisAspirasi = val!);
-                                      },
-                                      item: jenis_aspirasi.map(
-                                        (String val) {
-                                          return DropdownMenuItem(
-                                            value: val,
-                                            child: Text(val),
-                                          );
-                                        },
-                                      ).toList(),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  // Padding(
+                                  //   padding:
+                                  //       EdgeInsets.symmetric(horizontal: 20),
+                                  //   child: BuildDropdown(
+                                  //     val: jenisAspirasi,
+                                  //     hint: "Jenis Aspirasi",
+                                  //     label: "Jenis Aspirasi",
+                                  //     icon: Icons.speaker_notes_outlined,
+                                  //     color: primaryColor,
+                                  //     aksi: (val) {
+                                  //       setState(() => jenisAspirasi = val!);
+                                  //     },
+                                  //     item: jenis_aspirasi.map(
+                                  //       (String val) {
+                                  //         return DropdownMenuItem(
+                                  //           value: val,
+                                  //           child: Text(val),
+                                  //         );
+                                  //       },
+                                  //     ).toList(),
+                                  //   ),
+                                  // ),
+                                  // SizedBox(
+                                  //   height: 20,
+                                  // ),
                                   Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 20),
@@ -214,7 +214,6 @@ class _AddEditPageState extends State<AddEditPage> {
                                                     int.parse(widget.id_warga),
                                                 nama: nama.text,
                                                 aspirasi: aspirasi.text,
-                                                jenis_aspirasi: jenisAspirasi,
                                                 status: "Belum Dibaca");
                                             if (widget.aspirasi == null) {
                                               _apiService

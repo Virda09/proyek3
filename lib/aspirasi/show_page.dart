@@ -30,7 +30,7 @@ class _ShowPageState extends State<ShowPage> {
     if (widget.aspirasi != null) {
       nama.text = widget.aspirasi!.nama;
       aspirasi.text = widget.aspirasi!.aspirasi;
-      jenis_aspirasi.text = widget.aspirasi!.jenis_aspirasi;
+      jenis_aspirasi.text = widget.aspirasi!.jenis_aspirasi!;
       tanggal.text = _apiService.dateFormat(widget.aspirasi!.created_at!);
     }
     super.initState();

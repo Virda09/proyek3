@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:proyek3/model/warga.dart';
 
 class ApiService {
-  final String baseUrl = "http://10.0.164.241:8080/api";
+  final String baseUrl = "http://192.168.43.166:8080/api";
 
   String dateFormat(String date) {
     var newStr = '${date.substring(0, 10)} ${date.substring(11, 23)}';
@@ -74,10 +74,8 @@ class ApiService {
 
     request.headers.addAll(headers);
     request.fields.addAll(data);
-    // print("request: "+request.toString());
     var res = await request.send();
     var response = await http.Response.fromStream(res);
-    // print(response.body);
     if (res.statusCode == 200) {
       final res = json.decode(response.body);
       if (res['success']) {

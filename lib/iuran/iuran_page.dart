@@ -211,16 +211,16 @@ class _IuranPageState extends State<IuranPage> {
                           ),
                           Text(
                             data.status,
-                            style: data.status == "Diterima"
+                            style: data.status == "Terima"
                                 ? const TextStyle(color: Colors.green)
-                                : data.status == "Ditolak"
+                                : data.status == "Tolak"
                                     ? const TextStyle(color: Colors.red)
                                     : const TextStyle(color: Colors.blue),
                           ),
                         ],
                       ),
                       const SizedBox(height: 10),
-                      if (data.status != "Diterima")
+                      if (data.status != "Terima")
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [

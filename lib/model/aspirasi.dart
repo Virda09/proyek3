@@ -3,12 +3,12 @@
 import 'dart:convert';
 
 class Aspirasi {
-  String aspirasi, jenis_aspirasi, status, nama;
+  String aspirasi, status, nama;
   int id_warga;
-  String? created_at,method;
+  String? created_at,method, jenis_aspirasi;
   int? id;
 
-  Aspirasi({required this.id_warga, required this.nama, required this.aspirasi, required this.jenis_aspirasi, required this.status, this.created_at,this.id,this.method});
+  Aspirasi({required this.id_warga, required this.nama, required this.aspirasi, this.jenis_aspirasi, required this.status, this.created_at,this.id,this.method});
 
   factory Aspirasi.fromJson(Map<String, dynamic> map) {
     return Aspirasi(

@@ -59,14 +59,15 @@ class _LauncherPageState extends State<LauncherPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: Text(
-                "APPs",
-                style: TextStyle(
-                    color: secondaryColor,
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic),
-              ),
+              child:Image.asset('assets/logo-white.png'),
+              // Text(
+              //   "APPs",
+              //   style: TextStyle(
+              //       color: secondaryColor,
+              //       fontSize: 50,
+              //       fontWeight: FontWeight.bold,
+              //       fontStyle: FontStyle.italic),
+              // ),
             ),
           ],
         ),

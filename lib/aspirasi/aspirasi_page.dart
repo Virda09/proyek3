@@ -231,7 +231,7 @@ class _AspirasiPageState extends State<AspirasiPage> {
                       Row(
                         children: [
                           Text(
-                            "Jenis Aspirasi : ${data.jenis_aspirasi}",
+                            "Kategori : ${data.jenis_aspirasi}",
                             style: TextStyle(
                                 color: primaryColor,
                                 fontWeight: FontWeight.bold),
