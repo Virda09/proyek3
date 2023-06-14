@@ -48,7 +48,7 @@
                         <div class="row mb-3">
                             <div class="col-lg-6">
                                 <label for="password" class="form-label">Password</label>
-                                <input name="password" type="password" class="form-control" placeholder="Password" id="password">
+                                <input name="password" type="password" class="form-control"  id="password">
                                 @if ($errors->has('password'))
                                 <span class="invalid-feedback">{{ $errors->first('password') }}</span>
                                 @endif

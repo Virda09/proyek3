@@ -2,8 +2,8 @@
 
   <div class="d-flex align-items-center justify-content-between">
     <a href="index.html" class="logo d-flex align-items-center">
-      <!-- <img src="{{ asset('images/logo.png') }}" alt=""> -->
-      <span class="d-none d-lg-block">Aplikasi Perumahan</span>
+      <img src="{{ asset('images/logo-simohan.png') }}" alt="" style="max-width: 25%; max-height: 50%;">
+      <span class="d-none d-lg-block">SIMOHAN</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
   </div><!-- End Logo -->

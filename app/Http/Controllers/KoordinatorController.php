@@ -76,21 +76,20 @@ class KoordinatorController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $params = $request->all();
-
+            $params = $request->except('password');
+    
             if ($request->filled('password')) {
                 $params['password'] = Hash::make($request->password);
-            } else {
-                $params = $request->except('password');
             }
-
+    
             $user = User::findOrFail(Crypt::decrypt($id));
+    
             if ($user->update($params)) {
                 alert()->success('Success', 'Data Berhasil Disimpan');
             } else {
                 Session::flash('errors', 'Data Gagal Disimpan');
-                // alert()->error('Error','Data Berhasil Disimpan');
             }
+    
             return redirect('koordinator');
         } catch (\Throwable $th) {
             Session::flash('errors', 'Data Gagal Disimpan');

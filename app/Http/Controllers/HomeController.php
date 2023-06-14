@@ -30,9 +30,9 @@ class HomeController extends Controller
     {
         $warga = Warga::count();
         $data['warga'] = $warga;
-        $iuran = Iuran::where('status', 'tunggu')->get()->count();
+        $iuran = Iuran::where('status', 'Belum Dilihat')->get()->count();
         $data['iuran'] = $iuran;
-        $aspirasi = Aspirasi::where('status', 'belum dibaca')->get()->count();
+        $aspirasi = Aspirasi::where('status', 'Belum Dibaca')->get()->count();
         $data['aspirasi'] = $aspirasi;
         $date = new DateTime();
         $timeNow = $date->format('Y-m-d\TH:i');
@@ -40,6 +40,7 @@ class HomeController extends Controller
             ->orderBy('tanggal_kegiatan', 'ASC')
             ->limit(5)
             ->get();
+        // dd($timeNow);
         $data['kegiatan'] = $kegiatan;
         return view('home', $data);
     }

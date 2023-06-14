@@ -103,9 +103,9 @@ class AspirasiController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $params['status'] = 'dibaca';
+            $params['status'] = 'Dibaca';
             $aspirasi = Aspirasi::findOrFail(Crypt::decrypt($id));
-            $status = $aspirasi->update(['status' => 'dibaca']);
+            $status = $aspirasi->update(['status' => 'Dibaca']);
             if ($status) {
                 Alert()->success('Success', 'Data Berhasil Disimpan');
             } else {

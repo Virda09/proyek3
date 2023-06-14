@@ -21,7 +21,7 @@ class IuranController extends Controller
             $join->on("iurans.id_warga", "=", "wargas.id");
         })
             ->selectRaw("wargas.*, count(iurans.status) as validasi")
-            ->where("iurans.status", "=", "belum dilihat")
+            ->where("iurans.status", "=", "Belum Dilihat")
             ->groupBy('wargas.nama_lengkap')->get();
         $data['iuran'] = $iuran;
         return view('iuran.index', $data);
@@ -58,7 +58,7 @@ class IuranController extends Controller
     public function terima(string $id)
     {
         try {
-            $params['status'] = 'terima';
+            $params['status'] = 'Terima';
             $iuran = Iuran::findOrFail(Crypt::decrypt($id));
             if ($iuran->update($params)) {
                 Alert()->success('Success', 'Data Berhasil Disimpan');
@@ -74,7 +74,7 @@ class IuranController extends Controller
     public function tolak(string $id)
     {
         try {
-            $params['status'] = 'tolak';
+            $params['status'] = 'Tolak';
             $iuran = Iuran::findOrFail(Crypt::decrypt($id));
             if ($iuran->update($params)) {
                 Alert()->success('Success', 'Data Berhasil Disimpan');

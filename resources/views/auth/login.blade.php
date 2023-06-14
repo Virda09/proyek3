@@ -12,7 +12,7 @@
             <div class="d-flex justify-content-center py-4">
               <a href="index.html" class="logo d-flex align-items-center w-auto">
                 <!-- <img src="{{ asset('images/logo.png') }}" alt=""> -->
-                <span class="d-none d-lg-block">Aplikasi Perumahan</span>
+                <span class="d-none d-lg-block">SIMOHAN</span>
               </a>
             </div><!-- End Logo -->
 

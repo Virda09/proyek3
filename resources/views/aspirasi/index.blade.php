@@ -56,7 +56,7 @@
                 <td>{{ $data->jenis_aspirasi}}</td>
                 <td>{{ $data->created_at}}</td>
                 <td>
-                  @if($data->status == 'dibaca')
+                  @if($data->status == 'Dibaca')
                   <span class="badge rounded-pill bg-success">Sudah Dibaca</span>
                   @else
                   <span class="badge rounded-pill bg-danger">Belum Dibaca</span>

@@ -43,9 +43,9 @@
                                 <td>{{ $data->tgl_bayar }}</td>
                                 <td>{{ $data->nominal}}</td>
                                 <td>
-                                    @if($data->status == 'belum dilihat')
+                                    @if($data->status == 'Belum Dilihat')
                                     <span class="badge rounded-pill bg-primary">Belum Divalidasi</span>
-                                    @elseif($data->status == 'terima')
+                                    @elseif($data->status == 'Terima')
                                     <span class="badge rounded-pill bg-success">Diterima</span>
                                     @else
                                     <span class="badge rounded-pill bg-danger">Ditolak</span>

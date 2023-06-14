@@ -82,7 +82,7 @@ class ApiIuranController extends Controller
         }
 
         $params = $request->all();
-        $params['status'] = 'belum dilihat';
+        $params['status'] = 'Belum Dilihat';
 
         if ($request->has('bukti')) {
             $params['bukti'] = $this->simpanImage($request->file('bukti'), $request->id_warga);
@@ -120,10 +120,10 @@ class ApiIuranController extends Controller
     public function verifikasi($id, $value)
     {
         try {
-            if ($value == 'terima') {
-                $params['status'] = 'terima';
+            if ($value == 'Terima') {
+                $params['status'] = 'Terima';
             } else {
-                $params['status'] = 'tolak';
+                $params['status'] = 'Tolak';
             }
             $iuran = Iuran::findOrFail($id);
             if ($iuran->update($params)) {

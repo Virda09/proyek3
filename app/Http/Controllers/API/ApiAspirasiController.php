@@ -32,7 +32,6 @@ class ApiAspirasiController extends Controller
         $validator = Validator::make($request->all(), [
             'id_warga' => 'required',
             'aspirasi' => 'required|string',
-            'jenis_aspirasi' => 'required|string',
             'status' => 'required',
             'nama' => 'required',
         ]);
@@ -42,8 +41,11 @@ class ApiAspirasiController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $text = $request->aspirasi;
+        $predict = shell_exec("python c:/xampp/htdocs/proyek3/web-dev/app/Http/Controllers/Klasifikasi/klasifikasi.py ".escapeshellarg($text));
         $params = $request->all();
         $params['status'] = 'Belum Dibaca';
+        $params['jenis_aspirasi'] = trim($predict);
         try {
             $post = Aspirasi::create($params);
             if ($post) {

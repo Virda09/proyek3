@@ -89,30 +89,34 @@ class WargaController extends Controller
     public function update(WargaRequest $request, string $id)
     {
         try {
-            $params = $request->all();
+            $params = $request->except(['password', 'photo']);
             $params['username'] = $request->username;
             $params['nama'] = $request->nama_lengkap;
-
+    
+            $exc = [];
             if ($request->filled('password')) {
                 $params['password'] = Hash::make($request->password);
             } else {
-                $params = $request->except('password');
+                $exc[] = 'password';
             }
-
-            if ($request->has('photo')) {
+    
+            if ($request->hasFile('photo')) {
                 $params['photo'] = $this->simpanImage($request->file('photo'), $params['username']);
             } else {
-                $params = $request->except('photo');
+                $exc[] = 'photo';
             }
-
+    
+            $params = array_diff_key($params, array_flip($exc));
+    
             $warga = Warga::findOrFail(Crypt::decrypt($id));
             $user = User::findOrFail($warga->id_user);
+    
             if ($warga->update($params) && $user->update($params)) {
                 alert()->success('Success', 'Data Berhasil Disimpan');
             } else {
-                // Session::flash('errors', 'Data Gagal Disimpan');
-                alert()->error('Error','Data Berhasil Disimpan');
+                alert()->error('Error', 'Data Gagal Disimpan');
             }
+    
             return redirect('warga');
         } catch (\Throwable $th) {
             Session::flash('errors', 'Data Gagal Disimpan');
@@ -155,7 +159,7 @@ class WargaController extends Controller
         $file = $foto;
         $name = $nama . '_' . $dt->format('Y-m-d');
         $fileName = $name . '.' . $file->getClientOriginalExtension();
-        $folder = '/uploads/koordinator/warga';
+        $folder = '/uploads/warga';
 
         $check = public_path($folder) . $fileName;
 
